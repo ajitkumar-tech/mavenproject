@@ -17,11 +17,19 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+         distribution: temurin
+         java-version: 17
+
+      - name: Build with Maven
+        run: mvn clean package
        
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "1.3.7"  
+          terraform_version: "1.3.7"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -65,13 +73,7 @@ jobs:
       - name: deploy 
         run: kubectl apply -f nginx-deployment-service.yaml
 
-      - name: svc
-        run: kubectl get svc
-      - name: pod
-        run: kubectl get pods
-
-      - name: log
-        run: kubectl describe pods nginx-deployment-54dcc97b7b-cmfkl  
+      
 
         
     
