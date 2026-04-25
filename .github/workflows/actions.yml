@@ -6,7 +6,7 @@ on:
       - main
 env: 
  Region: ap-south-1
- name: nginx
+ name: java-eks-demo
  clustername: my-eks-cluster  
 
 jobs:  
