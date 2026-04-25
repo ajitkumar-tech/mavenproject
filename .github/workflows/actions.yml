@@ -4,7 +4,7 @@ on:
   push:     
     branches:    
       - main
-env: 
+env:  
  Region: ap-south-1
  name: java-eks-demo
  clustername: my-eks-cluster  
