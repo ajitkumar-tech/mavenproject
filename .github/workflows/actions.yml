@@ -55,6 +55,14 @@ jobs:
       - name: apply
         run: terraform destroy -auto-approve
 
+      - name: Install Trivy
+        run: |
+         sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+         wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+         echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/trivy.list
+         sudo apt-get update
+         sudo apt-get install trivy -y  
+
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         
@@ -66,6 +74,9 @@ jobs:
 
       - name: build
         run:  docker build -t ${{ env.name }} .
+      - name: scan docker image with trivy
+        run: trivy image --format json -o trivy-report.json java-eks-demo
+        
 
       - name: tag
         run: docker tag java-eks-demo:latest 748716953870.dkr.ecr.${{ env.Region }}.amazonaws.com/${{ env.name }}:latest
