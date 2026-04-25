@@ -60,7 +60,7 @@ jobs:
         run:  docker build -t ${{ env.name }} .
 
       - name: tag
-        run: docker tag nginx:latest 748716953870.dkr.ecr.${{ env.Region }}.amazonaws.com/${{ env.name }}:latest
+        run: docker tag java-eks-demo:latest 748716953870.dkr.ecr.${{ env.Region }}.amazonaws.com/${{ env.name }}:latest
            
       - name: push    
         run:  docker push 748716953870.dkr.ecr.${{ env.Region }}.amazonaws.com/${{ env.name }}:latest
