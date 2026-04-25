@@ -1,21 +1,25 @@
-
 package com.example;
 
-public class app {
+import com.sun.net.httpserver.HttpServer;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 
-    public static void main(String[] args) {
+public class App {
 
-        System.out.println("Hello World from Java Application running in EKS 🚀");
+    public static void main(String[] args) throws Exception {
 
-        while(true) {
-            try {
-                Thread.sleep(10000);
-                System.out.println("Application is running inside Kubernetes Pod...");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+        server.createContext("/", exchange -> {
+            String response = "Hello World from Java Application running in EKS 🚀";
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        });
+
+        server.start();
+
+        System.out.println("Server started on port 8080");
     }
-
 }
