@@ -72,6 +72,8 @@ jobs:
 
       - name: deploy 
         run: kubectl apply -f deployment.yaml
+      - name: pods
+        run: kubectl get pods
 
       
 
