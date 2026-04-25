@@ -25,6 +25,12 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
+
+      - name: SonarQube Scan
+        run: mvn sonar:sonar \
+          -Dsonar.projectKey=maven \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}   
        
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
