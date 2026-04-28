@@ -1,7 +1,13 @@
-FROM eclipse-temurin:17-jdk
+FROM tomcat:9-jdk17
 
-WORKDIR /app
+# Remove default apps
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-COPY target/java-eks-demo-1.0.jar app.jar 
+# Copy WAR file
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 
-ENTRYPOINT ["java","-jar","app.jar"]
+# Expose port
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
