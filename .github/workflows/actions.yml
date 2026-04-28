@@ -41,7 +41,7 @@ jobs:
         
      
       - name: build
-        run: docker build -f mindcircuit16d/Dockerfile build -t ${{ env.name }} .
+        run: docker build -f mindcircuit16d/Dockerfile -t ${{ env.name }} .
      
 
       - name: tag
