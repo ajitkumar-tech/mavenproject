@@ -25,10 +25,9 @@ jobs:
         run: |
           git clone https://github.com/devopstraininghub/mindcircuit16d.git    
 
-      - name: Build with Maven
-        run: 
-            cd mindcircuit16d
-            mvn clean package
+      - run: 
+           cd mindcircuit16d
+           mvn clean package
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
