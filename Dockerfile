@@ -1,13 +1,12 @@
-FROM tomcat:9-jdk17
+FROM maven AS buildstage 
+RUN mkdir /opt/mindcircuit16d
+WORKDIR /opt/mindcircuit16d
+COPY . .
+RUN mvn clean install ###########---> *.war
 
-# Remove default apps
-RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy WAR file
-COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
-
-# Expose port
+FROM tomcat 
+WORKDIR webapps
+COPY --from=buildstage /opt/mindcircuit16d/target/*.war .
+RUN rm -rf ROOT && mv *.war ROOT.war
 EXPOSE 8080
-
-# Start Tomcat
-CMD ["catalina.sh", "run"]
