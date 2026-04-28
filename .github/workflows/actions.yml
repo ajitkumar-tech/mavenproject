@@ -41,7 +41,7 @@ jobs:
         
      
       - name: build
-        run:  docker build -t ${{ env.name }} .
+        run: cd devopstraininghub && docker build -t ${{ env.name }} .
      
 
       - name: tag
