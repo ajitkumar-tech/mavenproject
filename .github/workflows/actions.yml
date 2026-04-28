@@ -14,15 +14,16 @@ jobs:
     
     steps:
      
-      - name: Clone repository
-        run: |
-          git clone https://github.com/devopstraininghub/mindcircuit16d.git
   
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
          distribution: temurin
          java-version: 17
+
+      - name: Clone repository
+        run: |
+          git clone https://github.com/devopstraininghub/mindcircuit16d.git    
 
       - name: Build with Maven
         run: 
