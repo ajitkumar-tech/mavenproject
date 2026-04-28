@@ -13,8 +13,7 @@ jobs:
     
     
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+     
       - name: Clone repository
         run: |
           git clone https://github.com/devopstraininghub/mindcircuit16d.git
