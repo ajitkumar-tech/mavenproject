@@ -25,7 +25,9 @@ jobs:
          java-version: 17
 
       - name: Build with Maven
-        run: mvn clean package
+        run: 
+            cd mindcircuit16d
+            mvn clean package
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
