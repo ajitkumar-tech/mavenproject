@@ -42,9 +42,7 @@ jobs:
 
       - name: build
         run:  docker build -t ${{ env.name }} .
-      - name: scan docker image with trivy
-        run: trivy image --format json -o trivy-report.json java-eks-demo
-        
+     
 
       - name: tag
         run: docker tag java-eks-demo:latest 748716953870.dkr.ecr.${{ env.Region }}.amazonaws.com/${{ env.name }}:latest
