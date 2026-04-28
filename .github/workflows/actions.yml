@@ -23,11 +23,12 @@ jobs:
 
       - name: Clone repository
         run: |
-          git clone https://github.com/devopstraininghub/mindcircuit16d.git    
+          git clone https://github.com/devopstraininghub/mindcircuit16d.git 
 
-      - run: 
-           cd mindcircuit16d
-           mvn clean package
+      - name: build
+        run: 
+          cd mindcircuit16d
+          mvn clean package
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
